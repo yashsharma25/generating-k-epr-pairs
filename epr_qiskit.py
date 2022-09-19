@@ -279,34 +279,9 @@ def post_selected_tomography():
 #Get pure states from density matrix by decomposition
 from scipy.linalg import lu
 from numpy import linalg as LA
-
-
-def lu_decomp_of_dm(stats, category):
-    stats_by_measurement_category = {}
-    columns = []
-    for s in stats[category]:
-        density_matrix = s.analysis_results("state").value
-
-        p,l,u = lu(np.array(density_matrix))
-
-# def eigen_decomp_of_dm(stats, category):
-#     stats_by_measurement_category = {}
-#     columns = []
-#     for s in stats[category]:
-#         density_matrix = s.analysis_results("state").value
-        
-#         val, vec = LA.eigh(np.array(density_matrix))
-        
-#         max_prob_state_index = np.argmax(val)
-#         pure_state = vec[:, max_prob_state_index]
-        
-#         return pure_state
-
    
-def eigen_decomp_of_dm(stats, category):
-    stats_by_measurement_category = {}
-    columns = []
-    for s in stats:
+def eigen_decomp_of_dm(state):
+    for s in state:
         density_matrix = s.analysis_results("state").value
         
         val, vec = LA.eigh(np.array(density_matrix))
@@ -316,7 +291,6 @@ def eigen_decomp_of_dm(stats, category):
         
         return pure_state
    
-
 def category_stats(stats, category):
     stats_by_measurement_category = {}
     columns = []
@@ -370,19 +344,8 @@ def trace_out_reconstructed_state(reconstructed_state):
 #stats = read_from_file('000000_tomography_stats')
 #reconstructed_state = eigen_decomp_of_dm(stats, '000000')
 
-post_selected_tomography()
+#post_selected_tomography()
 #trace_out_reconstructed_state(trace_out_reconstructed_state)
-
-#iterate over all the categories and run
-# stats = read_from_file('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/001010_20')
-# # print("Type = ", type(stats))
-# # print("Size = ", len(stats))
-# reconstructed_state = eigen_decomp_of_dm(stats, '001010')
-# trace_out_reconstructed_state(reconstructed_state)
-
-#take out the suffix from all category names?
-#or just run through all of those filenames and load them
-#yes, lets load all of them
 
 def check_reconstructed_state():
     categories = []
@@ -392,10 +355,10 @@ def check_reconstructed_state():
         categories.append(category)
 
     for c in categories:
-        stats = read_from_file('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/' + c)
+        tomography_data = read_from_file('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/' + c)
 
         print("Category = ", category)
-        reconstructed_state = eigen_decomp_of_dm(stats, c)
+        reconstructed_state = eigen_decomp_of_dm(tomography_data)
         trace_out_reconstructed_state(reconstructed_state)
 
 didnt_work = []
