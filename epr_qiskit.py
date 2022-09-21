@@ -232,9 +232,6 @@ def categorical_tomography():
         if stats_by_category.get(category) is None:
             stats_by_category[category] = list()
             reconstructed_state = tomography(result.data(0)['0-1-2-3'][i])
-            #get the category of this state
-            #remember the category is right to left
-            #Lets reverse it right here
 
             stats_by_category[category].append(reconstructed_state)
             print('Finished = ', finished)
