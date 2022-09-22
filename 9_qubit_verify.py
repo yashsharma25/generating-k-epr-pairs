@@ -218,7 +218,7 @@ def main():
         
 
 def single_class():
-    df = pd.read_csv('orbits-data/9qubitorbitsCi_labeled.csv')
+    df = pd.read_csv('9qubitorbitsCi_labeled.csv')
 
     # Each row is an entanglement class
     for row in zip(df['i'], df['graph_list']):
