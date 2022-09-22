@@ -1,6 +1,5 @@
 import numpy as np
 import itertools
-import networkx as nx
 
 import pandas as pd
 import re
@@ -9,7 +8,6 @@ import re
 # one can use LOCC to create any pattern of two EPR states on any subset of 4 qubits
 
 # number of qubits
-
 n = 9
 
 # Argument: binary matrix A
@@ -53,8 +51,6 @@ def test_epr(G, a, b):
 ####################################################################
 
 # define adjacency matrix of the graph state
-
-
 def get_adjacency_matrix():
     A = np.zeros((n, n), dtype=int)
 
@@ -164,15 +160,13 @@ def epr_generation_checker(A):
         if not(isOK):
             print('EPR pairs ', pp, ' cannot be generated')
 
-            # Should we terminate the search for each class
             print('Terminating the search...')
-            #exit()
             return generated_pairs
 
     return generated_pairs
 
-def main():
-    df = pd.read_csv('orbits-data/9qubitorbitsCi_labeled.csv')
+def check_all_graphs():
+    df = pd.read_csv('9qubitorbitsCi_labeled.csv')
 
     # Each row is an entanglement class
     for row in zip(df['i'], df['graph_list']):
@@ -208,16 +202,8 @@ def main():
                 print("G =", g)
                 print(A)
 
-
-            # print(A)
-            # print("____________________________________")
-
-        # print(
-        #     "******************************************************************************")
-    
-        
-
-def single_class():
+#the code checks for all LOCC equivalent graphs so checking for one graph in each class is enough
+def check_one_graph_per_class():
     df = pd.read_csv('9qubitorbitsCi_labeled.csv')
 
     # Each row is an entanglement class
@@ -261,6 +247,6 @@ def single_class():
     
     print("Total Generated Pairs =", generated_pairs)
 
-#main()
+#check_all_graphs()
 
-single_class()
+check_one_graph_per_class()
