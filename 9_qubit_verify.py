@@ -252,7 +252,7 @@ def single_class():
         print("Generated Pairs =", generated_pairs)
 
         if generated_pairs == int(3*n*(n-1)*(n-2)*(n-3)/24):
-            print("Generated all Pairs =", generated_pairs, "for class = ", i, " and graph = ", index)
+            print("Generated all Pairs =", generated_pairs, "for class = ", i)
             print("G =", g)
             print(A)
 
