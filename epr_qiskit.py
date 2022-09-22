@@ -346,40 +346,44 @@ def trace_out_reconstructed_state(reconstructed_state):
 
 def check_reconstructed_state():
     categories = []
-    for filename in os.listdir("/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/"):
+    for filename in os.listdir("Tomography_data_0_3_1_2/"):
         #remove file extension of .pkl
         category = filename[:-4]
         categories.append(category)
 
     for c in categories:
-        tomography_data = read_from_file('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/' + c)
+        tomography_data = read_from_file('Tomography_data_0_3_1_2/' + c)
 
         print("Category = ", category)
         reconstructed_state = eigen_decomp_of_dm(tomography_data)
         trace_out_reconstructed_state(reconstructed_state)
 
-didnt_work = []
-worked = []
+
 def check_reconstructed_state(filename):
     category = filename[:-4]
 
     try:
-        with open('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/' + filename, 'rb') as handle:
+        with open('Tomography_data_0_3_1_2/' + filename, 'rb') as handle:
             stats = pickle.load(handle)
-            worked.append(category)
             print("Category = ", category)
             reconstructed_state = eigen_decomp_of_dm(stats, category)
             trace_out_reconstructed_state(reconstructed_state)
-            #print("This is good")
+            print("2-pairability verification success for category ", category)
         
     except:
-        print("This didnt work", category)
-        didnt_work.append(category)
+        print("Reconstructed state verification failed", category)
+        
 
-#stats = read_from_file('/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/' + category)
-#check_reconstructed_state('001011_40.pkl')
 
-# for filename in os.listdir("/Users/yash/Documents/Research/Quantum Computing/Tomography_data_0_3_1_2/"):
-#     check_reconstructed_state(filename)
+def main():
+    for filename in os.listdir("Tomography_data_0_3_1_2/"):
+        check_reconstructed_state(filename)
 
-# print("Bell pairs generated = ", len(worked))
+    for filename in os.listdir("Tomography_data_0_1_2_3/"):
+        check_reconstructed_state(filename)
+
+    for filename in os.listdir("Tomography_data_0_2_1_3/"):
+        check_reconstructed_state(filename)
+
+# if __name__ == "__main__":
+#     main()
