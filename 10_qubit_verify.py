@@ -1,4 +1,4 @@
-# example of "4-pairable" graph state:
+# example of "2-pairable" graph state:
 # one can use LOCC to create any pattern of two EPR states on any subset of 4 qubits
 
 import numpy as np

@@ -4,7 +4,7 @@ import itertools
 import pandas as pd
 import re
 
-# example of "4-pairable" graph state:
+# example of "2-pairable" graph state:
 # one can use LOCC to create any pattern of two EPR states on any subset of 4 qubits
 
 # number of qubits
@@ -65,8 +65,6 @@ def get_adjacency_matrix():
     return A
 
 # compute all pairings of the set {0,1,...,n-1}
-
-
 def get_n_elem_pairings():
     S4 = itertools.permutations(range(4))
     four_elem_pairings = [sigma for sigma in S4 if sigma[0] <
@@ -79,8 +77,6 @@ def get_n_elem_pairings():
     return n_elem_pairings
 
 # compute a list of all Pauli measurement bases
-
-
 def get_pauli_bases():
     xyz = []
     for q in range(n-4):
