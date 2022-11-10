@@ -162,7 +162,7 @@ def epr_generation_checker(A):
     return generated_pairs
 
 def check_all_graphs():
-    df = pd.read_csv('9qubitorbitsCi_labeled.csv')
+    df = pd.read_csv('data/9qubitorbitsCi_labeled.csv')
 
     # Each row is an entanglement class
     for row in zip(df['i'], df['graph_list']):
